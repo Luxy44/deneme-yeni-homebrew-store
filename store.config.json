@@ -1,0 +1,24 @@
+{
+  "storeName": "HENBOX Store",
+  "tagline": "GoldHEN PS4 Homebrew Magazasi",
+  "targetFirmware": "13.52",
+  "rpi": {
+    "port": 12800,
+    "installPath": "/api/install",
+    "isExistsPath": "/api/is_exists",
+    "timeoutMs": 8000
+  },
+  "categories": [
+    { "id": "all", "label": "Tumu" },
+    { "id": "homebrew", "label": "Homebrew" },
+    { "id": "game", "label": "Oyun" },
+    { "id": "tool", "label": "Arac" },
+    { "id": "payload", "label": "Payload" },
+    { "id": "theme", "label": "Tema" }
+  ],
+  "catalogFiles": [
+    "catalog/apps.json",
+    "catalog/games.json",
+    "catalog/scraped.json"
+  ]
+}

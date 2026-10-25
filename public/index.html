@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HENBOX Store — PS4 Homebrew Magazasi</title>
+  <link rel="icon" type="image/png" href="assets/logo.png" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <!-- ===== UST BAR ===== -->
+    <header class="topbar">
+      <div class="brand">
+        <img src="assets/logo.png" alt="HENBOX logo" class="brand-logo" id="brandLogo" />
+        <div class="brand-text">
+          <h1 id="storeName">HENBOX Store</h1>
+          <span id="storeTagline">GoldHEN PS4 Homebrew Magazasi</span>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <span class="fw-badge" title="Hedef konsol surumu">FW <b id="targetFw">--</b></span>
+        <button class="btn btn-ghost" id="settingsBtn" aria-label="PS4 ayarlari">
+          <span class="btn-ico">⚙</span> PS4 Baglantisi
+        </button>
+      </div>
+    </header>
+
+    <!-- ===== KUSAK ===== -->
+    <section class="hero">
+      <div class="hero-inner">
+        <h2>Black Box tarzi, tamamen ozellesebilir homebrew magazasi</h2>
+        <p>Katalogdaki paketleri PS4 tarayicisindan inceleyin; Remote Package Installer ile kablosuz gonderin ya da PKG dosyasini indirip USB bellege atarak GoldHEN Package Installer ile kurun.</p>
+        <div class="hero-stats">
+          <div class="stat"><b id="statTotal">0</b><span>icerik</span></div>
+          <div class="stat"><b id="statHomebrew">0</b><span>homebrew</span></div>
+          <div class="stat"><b id="statGames">0</b><span>oyun</span></div>
+          <div class="stat"><b id="statTools">0</b><span>arac</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ARAC CUBUGU ===== -->
+    <section class="toolbar">
+      <div class="search-wrap">
+        <span class="search-ico">⌕</span>
+        <input type="search" id="searchInput" placeholder="Ara: oyun, araç veya gelistirici..." autocomplete="off" />
+      </div>
+      <select id="sortSelect" class="sort-select" aria-label="Siralama">
+        <option value="updated">En guncel</option>
+        <option value="title">Ada gore (A-Z)</option>
+        <option value="size">Boyuta gore</option>
+      </select>
+    </section>
+
+    <!-- ===== KATEGORILER ===== -->
+    <nav class="categories" id="categoryPills" aria-label="Kategoriler"></nav>
+
+    <!-- ===== KARTLAR ===== -->
+    <main class="grid-wrap">
+      <div class="grid" id="catalogGrid"></div>
+      <div class="empty" id="emptyState" hidden>
+        <h3>Sonuc bulunamadi</h3>
+        <p>Farkli bir arama terimi veya kategori deneyin.</p>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <p>
+        HENBOX Store acik kaynak bir arayuzdur. Katalogda yer alan iceriklerin dagitim hakki
+        icerik sahiplerine aittir; yalnizca kullanma/dagitma hakkiniz olan paketleri ekleyin.
+      </p>
+      <p class="footer-meta">GoldHEN · Remote Package Installer · fPKG altyapisi uzerine kurulmustur</p>
+    </footer>
+  </div>
+
+  <!-- ===== DETAY MODALI ===== -->
+  <div class="modal-backdrop" id="modalBackdrop" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" id="modalClose" aria-label="Kapat">✕</button>
+      <div class="modal-head">
+        <div class="modal-cover" id="modalCover"></div>
+        <div class="modal-head-info">
+          <span class="badge" id="modalCategory"></span>
+          <h3 id="modalTitle"></h3>
+          <p class="modal-dev" id="modalDeveloper"></p>
+          <div class="modal-meta" id="modalMeta"></div>
+        </div>
+      </div>
+      <p class="modal-desc" id="modalDesc"></p>
+
+      <div class="modal-packages" id="modalPackages"></div>
+
+      <div class="install-methods" id="installMethods">
+        <div class="method">
+          <h4>① Uzaktan kurulum (RPI)</h4>
+          <ol>
+            <li>PS4'te <b>Remote Package Installer</b> uygulamasini acin ve ekranda birakin</li>
+            <li>Ust bardaki <b>⚙ PS4 Baglantisi</b> ile konsol IP'sini tanimlayin</li>
+            <li><b>PS4'e Gonder</b> butonuna basin, bildirimlerden kurulumu izleyin</li>
+          </ol>
+        </div>
+        <div class="method">
+          <h4>② USB ile kurulum (GoldHEN)</h4>
+          <ol>
+            <li><b>PKG Indir</b> ile dosyayi bilgisayara kaydedin</li>
+            <li>exFAT/FAT32 USB bellegin <b>kok klasorune</b> kopyalayin</li>
+            <li>PS4'te GoldHEN'i aktif edin: <b>Ayarlar → GoldHEN → Package Installer</b></li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn btn-gold" id="sendBtn">📡 PS4'e Gonder (RPI)</button>
+        <a class="btn btn-outline" id="downloadBtn" target="_blank" rel="noopener" download>⬇ PKG Indir (USB)</a>
+        <button class="btn btn-outline" id="copyBtn">🔗 Linki Kopyala</button>
+        <a class="btn btn-outline" id="homepageBtn" target="_blank" rel="noopener">🌐 Kaynak Sayfa</a>
+        <button class="btn btn-ghost" id="checkBtn" hidden>✓ Konsolda Kontrol Et</button>
+      </div>
+      <p class="modal-hint" id="modalHint"></p>
+    </div>
+  </div>
+
+  <!-- ===== AYARLAR MODALI ===== -->
+  <div class="modal-backdrop" id="settingsBackdrop" hidden>
+    <div class="modal modal-sm" role="dialog" aria-modal="true">
+      <button class="modal-close" id="settingsClose" aria-label="Kapat">✕</button>
+      <h3 class="settings-title">PS4 Baglanti Ayarlari</h3>
+      <label class="field-label" for="ps4IpInput">PS4 IP adresi (orn. 192.168.1.20)</label>
+      <input type="text" id="ps4IpInput" class="text-input" placeholder="192.168.1.20" />
+      <p class="settings-note">
+        Remote Package Installer uygulamasinin PS4'te acik ve odakta olmasi gerekir.
+        IP'yi Ayarlar → Ag → Baglanti durumunu görüntüle ekranindan ogrenebilirsiniz.
+      </p>
+      <div class="modal-actions">
+        <button class="btn btn-gold" id="saveSettingsBtn">Kaydet</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" hidden></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
