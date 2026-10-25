@@ -1,0 +1,23 @@
+[
+  {
+    "id": "ornek-homebrew-oyunu",
+    "title": "Ornek Homebrew Oyunu (SEBIL)",
+    "developer": "Kendi Ekibiniz",
+    "category": "game",
+    "type": "pkg",
+    "version": "1.00",
+    "firmware": "5.05+",
+    "region": "GLOBAL",
+    "size": 104857600,
+    "sizeLabel": "100 MB",
+    "titleId": "IV0000-HENBX00001",
+    "description": "Bu kayit bir SEMBOLDUR. Kendi paketlerinizi veya dagitim hakkiniz olan icerikleri bu formatda ekleyin. Zorunlu alanlar: id, title, category, packages. Eksik alanlar arayuzde otomatik olarak '-' ile gosterilir.",
+    "covers": [],
+    "packages": [
+      "http://192.168.1.50:8080/ornek-oyun.pkg"
+    ],
+    "homepage": "https://example.com",
+    "source": "manual",
+    "updatedAt": "2026-10-25"
+  }
+]

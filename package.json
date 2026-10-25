@@ -1,0 +1,29 @@
+{
+  "name": "henbox-ps4-store",
+  "version": "1.0.0",
+  "description": "HENBOX - GoldHEN'li PS4 icin Black Box tarzi homebrew store (web arayuzu + katalog + scraper altyapisi + Remote Package Installer destegi)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "scrape": "node scrapers/index.js",
+    "scrape:dry": "node scrapers/index.js --dry-run",
+    "import": "node scrapers/importJson.js",
+    "catalog:check": "node scrapers/catalogCheck.js"
+  },
+  "keywords": [
+    "ps4",
+    "goldhen",
+    "homebrew",
+    "store",
+    "pkg",
+    "remote-package-installer",
+    "rpi"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.7.7",
+    "cheerio": "^1.0.0",
+    "express": "^4.21.0"
+  }
+}

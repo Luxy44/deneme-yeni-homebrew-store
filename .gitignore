@@ -1,0 +1,9 @@
+node_modules/
+catalog/scraped.json
+.env
+*.log
+npm-debug.log*
+.DS_Store
+.idea/
+.vscode/
+tmp/

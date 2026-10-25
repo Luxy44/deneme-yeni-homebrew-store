@@ -1,0 +1,23 @@
+[
+  {
+    "id": "scraped-ornek-kayit",
+    "title": "Scraper Ciktisi Ornek Kayit",
+    "developer": "Bilinmiyor",
+    "category": "game",
+    "type": "pkg",
+    "version": "1.00",
+    "firmware": "Bilinmiyor",
+    "region": "GLOBAL",
+    "size": null,
+    "sizeLabel": "Bilinmiyor",
+    "titleId": null,
+    "description": "scrapers/ klasorundeki adapterlerin urettigi cikti bu formata sahiptir. 'npm run scrape' komdu catalog/scraped.json dosyasini olusturur; bu dosya .gitignore ile surum kontrolune dahil edilmez. Ornek olarak bu dosyayi kopyalayip scraped.json olarak kullanabilirsiniz.",
+    "covers": [],
+    "packages": [
+      "http://192.168.1.50:8080/direkt-paket-linki.pkg"
+    ],
+    "homepage": "https://ornek-kaynak-sitesi.com/oyun-sayfasi",
+    "source": "mcpsp",
+    "updatedAt": "2026-10-25"
+  }
+]
