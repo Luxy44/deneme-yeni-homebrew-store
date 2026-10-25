@@ -46,6 +46,21 @@ Kurallar:
 - `packages` icindeki her adres `http://` veya `https://` ile baslamali.
 - Dogrulama icin: `npm run catalog:check` (hata varsa cikis kodu 1 doner).
 
+### Tek kayit, iki kurulum yontemi
+
+`packages` dizisine eklenen her URL icin arayuz otomatik olarak **iki**
+kurulum yontemi sunar; ayri alan tanimlamaya gerek yok:
+
+1. **Uzaktan (RPI):** "PS4'e Gonder" butonu URL'yi konsoldaki Remote
+   Package Installer'a iletir.
+2. **USB:** "PKG Indir (USB)" butonu (ve satir bazli "Indir" linkleri)
+   dosyayi tarayici uzerinden bilgisayara indirir; kullanici exFAT USB'nin
+   kokune kopyalayip GoldHEN Package Installer ile kurar.
+
+Cok parcali paket (`ana.pkg` + `guncelleme_0.pkg` + `guncelleme_1.pkg`)
+eklediginizde her parca ayri bir indirme linki alir, RPI ise hepsini tek
+istekte sirayla gonderir.
+
 ## 3. Toplu aktarma
 
 Kendi JSON listenizi hazirlayip tek komutla ekleyin:

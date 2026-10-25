@@ -21,6 +21,12 @@ const state = {
 
 const $ = (sel) => document.querySelector(sel);
 
+function escapeHTML(str) {
+  return String(str ?? '').replace(/[&<>"']/g, (c) => (
+    { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
+  ));
+}
+
 function toast(message, type = '') {
   const el = $('#toast');
   el.textContent = message;
@@ -224,29 +230,54 @@ function openModal(item) {
   $('#modalCover').innerHTML = coverHTML(item, true);
   $('#modalDesc').textContent = item.description || 'Aciklama girilmemis.';
 
+  const pkgs = item.packages || [];
+
   const meta = $('#modalMeta');
   meta.innerHTML = `
-    <span>Surum: <b>${item.version || '—'}</b></span>
-    <span>Firmware: <b>${item.firmware || '—'}</b></span>
-    <span>Bölge: <b>${item.region || '—'}</b></span>
-    <span>Boyut: <b>${item.sizeLabel || formatSize(item.size)}</b></span>
-    <span>Kaynak: <b>${item.source || 'manuel'}</b></span>`;
+    <span>Surum: <b>${escapeHTML(item.version || '—')}</b></span>
+    <span>Firmware: <b>${escapeHTML(item.firmware || '—')}</b></span>
+    <span>Bölge: <b>${escapeHTML(item.region || '—')}</b></span>
+    <span>Boyut: <b>${escapeHTML(item.sizeLabel || formatSize(item.size))}</b></span>
+    <span>Kaynak: <b>${escapeHTML(item.source || 'manuel')}</b></span>
+    ${pkgs.length ? '<span>Kurulum: <b>RPI · USB</b></span>' : ''}`;
 
   const pkgWrap = $('#modalPackages');
-  const pkgs = item.packages || [];
   pkgWrap.innerHTML = pkgs.length
-    ? pkgs.map((u) => `<div class="pkg-row"><span class="pkg-ico">📦</span><span>${u}</span></div>`).join('')
-    : '<div class="pkg-row"><span class="pkg-ico">ℹ</span><span>Bu kayitta direkt paket baglantisi yok. Kaynak sayfayi ziyaret edin.</span></div>';
+    ? pkgs.map((u, i) => `
+      <div class="pkg-row">
+        <span class="pkg-ico">📦</span>
+        <span class="pkg-url">${pkgs.length > 1 ? `<span class="pkg-part">Parça ${i + 1}:</span>` : ''}${escapeHTML(u)}</span>
+        <a class="pkg-dl" href="${escapeHTML(u)}" target="_blank" rel="noopener" download
+           title="PKG dosyasini indir (USB ile kurulum)">Indir</a>
+      </div>`).join('')
+    : '<div class="pkg-row"><span class="pkg-ico">ℹ</span><span class="pkg-url">Bu kayitta direkt paket baglantisi yok. Kaynak sayfayi ziyaret edin.</span></div>';
 
   const isPkg = item.type === 'pkg' && pkgs.length > 0;
   $('#sendBtn').disabled = !isPkg;
   $('#sendBtn').title = isPkg ? '' : 'RPI yalnizca .pkg paketleri kurabilir';
+
+  // USB akisi: ana "PKG Indir" butonu ilk paketi (cok parcaliysa parca 1'i) indirir
+  const dlBtn = $('#downloadBtn');
+  if (pkgs.length) {
+    dlBtn.href = pkgs[0];
+    dlBtn.style.pointerEvents = 'auto';
+    dlBtn.style.opacity = '1';
+    dlBtn.title = pkgs.length > 1
+      ? `Ilk parcayi indirir. Kalan ${pkgs.length - 1} parcayi asagidaki satirlardan indirin.`
+      : 'PKG dosyasini bilgisayara indir, USB kokune kopyala';
+  } else {
+    dlBtn.removeAttribute('href');
+    dlBtn.style.pointerEvents = 'none';
+    dlBtn.style.opacity = '0.4';
+    dlBtn.title = 'Bu kayitta indirilecek paket yok';
+  }
+  $('#installMethods').hidden = pkgs.length === 0;
   $('#checkBtn').hidden = !item.titleId;
   $('#homepageBtn').href = item.homepage || '#';
   $('#homepageBtn').style.pointerEvents = item.homepage ? 'auto' : 'none';
   $('#homepageBtn').style.opacity = item.homepage ? '1' : '0.4';
   $('#modalHint').textContent = isPkg
-    ? 'PS4\'te Remote Package Installer acik olmali ve paket URL\'si konsolun erisebildigi (yerel ag veya internet) bir HTTP adresi olmali.'
+    ? 'Uzaktan kurulumda PS4\'te Remote Package Installer acik olmali; paket URL\'si konsolun erisebildigi bir HTTP adresi olmali. İndirdiginiz .pkg dosyasini USB kokune atip GoldHEN Package Installer ile de kurabilirsiniz.'
     : 'Payload/arsiv dosyalari RPI ile kurulmaz; GoldHEN/PPPwn kilavuzunu docs/PS4-KURULUM.md icinde bulabilirsiniz.';
 
   $('#modalBackdrop').hidden = false;

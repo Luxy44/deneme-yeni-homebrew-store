@@ -1,6 +1,6 @@
 {
   "name": "henbox-ps4-store",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "HENBOX - GoldHEN'li PS4 icin Black Box tarzi homebrew store (web arayuzu + katalog + scraper altyapisi + Remote Package Installer destegi)",
   "main": "server.js",
   "scripts": {
@@ -9,7 +9,8 @@
     "scrape": "node scrapers/index.js",
     "scrape:dry": "node scrapers/index.js --dry-run",
     "import": "node scrapers/importJson.js",
-    "catalog:check": "node scrapers/catalogCheck.js"
+    "catalog:check": "node scrapers/catalogCheck.js",
+    "test": "node tests/smoke.test.js"
   },
   "keywords": [
     "ps4",
@@ -25,5 +26,8 @@
     "axios": "^1.7.7",
     "cheerio": "^1.0.0",
     "express": "^4.21.0"
+  },
+  "devDependencies": {
+    "jsdom": "^30.1.3"
   }
 }

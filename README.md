@@ -12,8 +12,12 @@ kablosuz PKG gonderimi tek repoda.
 
 - 🎮 **PS4/Black Box estetigi** — koyu zemin, altin vurgu, kapak kartlari,
   kategori pill'leri, arama ve siralama
-- 📡 **PS4'e tek tikla gonderim** — flatz'in [Remote Package Installer](https://github.com/flatz/ps4_remote_pkg_installer)
-  protokolu (`http://<PS4_IP>:12800/api/install`)
+- 📡 **Cift kurulum yontemi** — her paket iki sekilde kurulabilir:
+  - **Uzaktan (RPI):** flatz'in [Remote Package Installer](https://github.com/flatz/ps4_remote_pkg_installer)
+    protokoluyle (`http://<PS4_IP>:12800/api/install`) tek tikla gonderim
+  - **USB:** "PKG Indir" butonuyla dosyayi bilgisayara kaydet, exFAT USB'nin
+    kokune at, PS4'te GoldHEN → Package Installer ile kur
+  - Cok parcali paketlerde her parcanin ayri indirme linki olur
 - 🗂️ **JSON katalog** — kod bilmeden `catalog/` altina dosya ekleyerek icerik yonetimi
 - 🕷️ **Scraper altyapisi** — `mcpsp`, `dlpsgame`, `superpsx` adapterleri ile
   secici tabanli (cheerio) kazima; yeni site eklemek tek dosya

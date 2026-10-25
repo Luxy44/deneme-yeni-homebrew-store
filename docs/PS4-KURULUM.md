@@ -115,14 +115,27 @@ filehost linkleri RPI ile calismaz. Linki once tarayicida gizli sekmede test edi
 
 ## 6. USB ile kurulum (alternatif)
 
-RPI kullanmak istemiyorsaniz:
+RPI kullanmak istemiyorsaniz HENBOX modalindaki **⬇ PKG Indir (USB)** butonu
+(veya her paket satirindaki kucuk "Indir" linki) ile dosyayi bilgisayara kaydedin:
 
-1. `.pkg` dosyasini exFAT/FAT32 bicimli USB bellegin kokune kopyalayin
-2. PS4'te **Ayarlar → GoldHEN → Package Installer** (veya debug Package Installer)
-3. Paketi secip kurun
+1. İndirilen `.pkg` dosyasini exFAT/FAT32 bicimli USB bellegin **kokune** kopyalayin
+   (alt klasore degil; PS4 Package Installer kok dizini tarar)
+2. USB bellegi PS4'e takin
+3. GoldHEN aktifken **Ayarlar → GoldHEN → Package Installer** (veya debug
+   Settings → Game → Package Installer) ekranini acin
+4. Paketi secip kurun; cok parcali kurulumda once ana paketi, sonra
+   guncelleme/parca dosyalarini ayni sirayla kurun
 
-HENBOX'taki **🔗 Linki Kopyala** butonu paketi indirip USB'ye atmak icin de
-kullanilabilir.
+**🔗 Linki Kopyala** butonu linki baska bir indiriciye (orn. IDM, wget)
+vermek icin de kullanilabilir:
+
+```bash
+wget -O oyun.pkg "kopyalanan-link"
+```
+
+> Tarayici bazi sitelerde `download` ozelligini yok sayip linki yeni sekmede
+> acabilir; bu durumda acilan sayfada sag tik → "Farkli kaydet" ile `.pkg`
+> dosyasini alin. GitHub release linkleri dosyayi dogrudan indirir.
 
 ## 7. Payload ve 7z dosyalari
 

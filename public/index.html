@@ -30,7 +30,7 @@
     <section class="hero">
       <div class="hero-inner">
         <h2>Black Box tarzi, tamamen ozellesebilir homebrew magazasi</h2>
-        <p>Katalogdaki paketleri PS4 tarayicisindan inceleyin, Remote Package Installer ile kablosuz gonderin veya direk linki kopyalayip USB/HTTP sunucunuzla kurun.</p>
+        <p>Katalogdaki paketleri PS4 tarayicisindan inceleyin; Remote Package Installer ile kablosuz gonderin ya da PKG dosyasini indirip USB bellege atarak GoldHEN Package Installer ile kurun.</p>
         <div class="hero-stats">
           <div class="stat"><b id="statTotal">0</b><span>icerik</span></div>
           <div class="stat"><b id="statHomebrew">0</b><span>homebrew</span></div>
@@ -91,8 +91,28 @@
 
       <div class="modal-packages" id="modalPackages"></div>
 
+      <div class="install-methods" id="installMethods">
+        <div class="method">
+          <h4>① Uzaktan kurulum (RPI)</h4>
+          <ol>
+            <li>PS4'te <b>Remote Package Installer</b> uygulamasini acin ve ekranda birakin</li>
+            <li>Ust bardaki <b>⚙ PS4 Baglantisi</b> ile konsol IP'sini tanimlayin</li>
+            <li><b>PS4'e Gonder</b> butonuna basin, bildirimlerden kurulumu izleyin</li>
+          </ol>
+        </div>
+        <div class="method">
+          <h4>② USB ile kurulum (GoldHEN)</h4>
+          <ol>
+            <li><b>PKG Indir</b> ile dosyayi bilgisayara kaydedin</li>
+            <li>exFAT/FAT32 USB bellegin <b>kok klasorune</b> kopyalayin</li>
+            <li>PS4'te GoldHEN'i aktif edin: <b>Ayarlar → GoldHEN → Package Installer</b></li>
+          </ol>
+        </div>
+      </div>
+
       <div class="modal-actions">
         <button class="btn btn-gold" id="sendBtn">📡 PS4'e Gonder (RPI)</button>
+        <a class="btn btn-outline" id="downloadBtn" target="_blank" rel="noopener" download>⬇ PKG Indir (USB)</a>
         <button class="btn btn-outline" id="copyBtn">🔗 Linki Kopyala</button>
         <a class="btn btn-outline" id="homepageBtn" target="_blank" rel="noopener">🌐 Kaynak Sayfa</a>
         <button class="btn btn-ghost" id="checkBtn" hidden>✓ Konsolda Kontrol Et</button>
